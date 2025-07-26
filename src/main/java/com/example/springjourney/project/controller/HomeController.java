@@ -18,4 +18,12 @@ public class HomeController {
         return "courses.html" ;         // which is override addViewControllers method.
     }
     */
+
+    /*
+    @RequestMapping("/about")           //Building a controller method for the courses page
+    public String aboutUsPage(){        // but as it alway display the same content, i tried a second method
+        return "about.html" ;           // which is override addViewControllers method.
+    }
+    */
+
 }
