@@ -12,4 +12,10 @@ public class HomeController {
     public String homePage(){
         return "home.html";
     }
+    /*
+    @RequestMapping("/courses")         //Building a controller method for the courses page
+    public String coursesPage(){        // but as it alway display the same content, i tried a second method
+        return "courses.html" ;         // which is override addViewControllers method.
+    }
+    */
 }
