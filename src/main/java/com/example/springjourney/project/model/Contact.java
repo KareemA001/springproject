@@ -1,5 +1,9 @@
 package com.example.springjourney.project.model;
 
+
+import lombok.Data;
+
+@Data
 public class Contact {
 
     private String name ;
@@ -8,6 +12,7 @@ public class Contact {
     private String phoneNum ;
     private String subject ;
 
+    /*
     public String getName() {
         return name;
     }
@@ -58,4 +63,6 @@ public class Contact {
                 ", subject='" + subject + '\'' +
                 '}';
     }
+
+     */
 }

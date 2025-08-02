@@ -1,5 +1,9 @@
 package com.example.springjourney.project.model;
 
+
+import lombok.Data;
+
+@Data
 public class Holiday {
 
     public final String day ;
@@ -9,7 +13,7 @@ public class Holiday {
     public enum Type {
         FESTIVAL, FEDERAL
     } ;
-
+    /*
     public Holiday(String day, String reason, Type type) {
         this.day = day;
         this.reason = reason;
@@ -27,4 +31,6 @@ public class Holiday {
     public Type getType() {
         return type;
     }
+    */
+
 }
