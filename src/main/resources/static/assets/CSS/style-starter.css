@@ -21220,7 +21220,7 @@ h4.inner-text-title {
 }
 
 .four_zero_four_bg{
-    background-image: url(/assets/images/dribbble.gif);
+    background-image: url(/static/assets/images/dribbble.gif.url);
     height: 400px;
     background-position: center;
 }
