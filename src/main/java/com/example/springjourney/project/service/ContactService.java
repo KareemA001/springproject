@@ -18,33 +18,35 @@ import java.util.List;
 public class ContactService {
 
     @Autowired
-    private ContactRepo contactRepo;
+    private ContactRepo contactRepository;
 
-    @PostMapping(value="/saveMsg")
-    public boolean saveMessageDetails(@Valid @ModelAttribute("contact") Contact contact) {
-
+    /**
+     * Save Contact Details into DB
+     * @param contact
+     * @return boolean
+     */
+    public boolean saveMessageDetails(Contact contact){
         boolean isSaved = false;
         contact.setStatus(ProjectConstants.OPEN);
         contact.setCreatedBy(ProjectConstants.ANONYMOUS);
         contact.setCreatedAt(LocalDateTime.now());
-        int result = contactRepo.saveContactMsg(contact);
-        if (result > 0) {
+        int result = contactRepository.saveContactMsg(contact);
+        if(result>0) {
             isSaved = true;
         }
         return isSaved;
     }
     public List<Contact> findMsgsWithOpenStatus(){
-        List<Contact> contactMsgs = contactRepo.findMsgsWithStatus(ProjectConstants.OPEN);
+        List<Contact> contactMsgs = contactRepository.findMsgsWithStatus(ProjectConstants.OPEN);
         return contactMsgs;
     }
 
     public boolean updateMsgStatus(int contactId, String updatedBy){
         boolean isUpdated = false;
-        int result = contactRepo.updateMsgStatus(contactId,ProjectConstants.CLOSE, updatedBy);
+        int result = contactRepository.updateMsgStatus(contactId,ProjectConstants.CLOSE, updatedBy);
         if(result>0) {
             isUpdated = true;
         }
         return isUpdated;
     }
-
 }
