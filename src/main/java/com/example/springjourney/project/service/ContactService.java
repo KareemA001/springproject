@@ -1,19 +1,35 @@
 package com.example.springjourney.project.service;
 
-import com.example.springjourney.project.controller.ContactController;
+import com.example.springjourney.project.constants.ProjectConstants;
 import com.example.springjourney.project.model.Contact;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.example.springjourney.project.repos.ContactRepo;
+import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
+import java.time.LocalDateTime;
+
+@Slf4j
 @Service
 public class ContactService {
 
-    private static Logger log = LoggerFactory.getLogger(ContactService.class) ;
+    @Autowired
+    private ContactRepo contactRepo;
 
-    public boolean savemessageDetails(Contact contact){
-        boolean isSaved = true;
-        log.info(contact.toString());
+    @PostMapping(value="/saveMsg")
+    public boolean saveMessageDetails(@Valid @ModelAttribute("contact") Contact contact) {
+
+        boolean isSaved = false;
+        contact.setStatus(ProjectConstants.OPEN);
+        contact.setCreatedBy(ProjectConstants.ANONYMOUS);
+        contact.setCreatedAt(LocalDateTime.now());
+        int result = contactRepo.saveContactMsg(contact);
+        if (result > 0) {
+            isSaved = true;
+        }
         return isSaved;
     }
 
