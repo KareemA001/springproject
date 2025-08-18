@@ -3,13 +3,13 @@ Author: W3layouts
 Author URL: http://w3layouts.com
 -->
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Spring School - Best Educational Institute for your Child</title>
+    <title>Eazy School - Best Educational Institute for your Child</title>
     <!-- Google fonts -->
     <link href="//fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
     <!-- Template CSS Style link -->
@@ -17,10 +17,11 @@ Author URL: http://w3layouts.com
 </head>
 
 <body>
+<!-- header -->
+<div th:replace="~{header :: header}">...</div>
+<!-- //header -->
 
 <!-- banner section -->
-
-<div th:replace="header :: header" ></div>
 <section id="home" class="w3l-banner py-5">
     <div class="banner-content">
         <div class="container py-4">
@@ -30,7 +31,7 @@ Author URL: http://w3layouts.com
                     </h3>
                     <p class="banner-sub">Active Learning, Expert Teachers & Safe Environment</p>
                     <div class="d-flex align-items-center buttons-banner">
-                        <a th:href="@{/contact}"class="btn btn-style mt-lg-5 mt-4">Admission Now</a>
+                        <a th:href="@{/contact}" class="btn btn-style mt-lg-5 mt-4">Admission Now</a>
                     </div>
                 </div>
                 <div class="col-md-6 right-banner-2 text-end position-relative mt-md-0 mt-5">
@@ -54,7 +55,7 @@ Author URL: http://w3layouts.com
     <div class="container py-md-5 py-4">
         <div class="title-main text-center mx-auto mb-md-5 mb-4" style="max-width:500px;">
             <p class="text-uppercase">Best Features</p>
-            <h3 class="title-style">Achieve Your Goals With Spring School</h3>
+            <h3 class="title-style">Achieve Your Goals With Eazy School</h3>
         </div>
         <div class="row">
             <div class="col-md-6 col-lg-3 d-flex align-items-stretch">
@@ -113,7 +114,7 @@ Author URL: http://w3layouts.com
                     <li><i class="fas fa-check-circle"></i>Access more than 100K online courses</li>
                     <li><i class="fas fa-check-circle"></i>Traditional Academies</li>
                 </ul>
-                <a th:href="@{/contact}"class="btn btn-style mt-5">Apply Now</a>
+                <a th:href="@{/contact}" class="btn btn-style mt-5">Apply Now</a>
             </div>
         </div>
     </div>
@@ -195,7 +196,7 @@ Author URL: http://w3layouts.com
                             <img src="assets/images/testi1.jpg" class="img-fluid rounded-circle"
                                  alt="client image" />
                             <blockquote class="quote"><q>I am very happy that my son is studying in the
-                                Spring school. The support provided by the teachers is great and the curriculum
+                                Eazy school. The support provided by the teachers is great and the curriculum
                                 that they follow is of international standards.
                             </q> </blockquote>
                             <div class="source">- Mario Spe</div>
@@ -205,7 +206,7 @@ Author URL: http://w3layouts.com
                             <img src="assets/images/testi2.jpg" class="img-fluid rounded-circle"
                                  alt="client image" />
                             <blockquote class="quote"><q>My child never felt pressure of studies in
-                                the Spring School. He is always encouraged to follow his own interest
+                                the Eazy School. He is always encouraged to follow his own interest
                                 and the school provides wide variety of programs for the students
                                 outside studies.
                             </q> </blockquote>
@@ -233,7 +234,7 @@ Author URL: http://w3layouts.com
                         <li class="anim5">
                             <img src="assets/images/testi2.jpg" class="img-fluid rounded-circle"
                                  alt="client image" />
-                            <blockquote class="quote"><q>Spring Schools supports both online and offline
+                            <blockquote class="quote"><q>Eazy Schools supports both online and offline
                                 classes based on the pandemic conditions to make sure that there is
                                 no impact on the children studies. School staff always does their
                                 best to accommodate parents request.
@@ -341,7 +342,7 @@ Author URL: http://w3layouts.com
                     <li class="phone-sec me-lg-4"><i class="fas fa-phone-volume"></i>
                         <a class="call-style-w3" href="tel:+1(23) 456 789 0000">+1(23) 673 458 1111</a>
                     </li>
-                    <li><a th:href="@{/contact}"class="btn btn-style btn-style-2 mt-lg-0 mt-3">Join for free</a>
+                    <li><a th:href="@{/contact}" class="btn btn-style btn-style-2 mt-lg-0 mt-3">Join for free</a>
                     </li>
                 </ul>
             </div>
@@ -350,7 +351,10 @@ Author URL: http://w3layouts.com
 </section>
 <!-- //call block -->
 
-<div th:replace="footer:: footer"></div>
+<!-- footer block -->
+<div th:replace="~{footer :: footer}">...</div>
+<!-- //footer block -->
+
 <!-- Js scripts -->
 <!-- move top -->
 <button onclick="topFunction()" id="movetop" title="Go to top">

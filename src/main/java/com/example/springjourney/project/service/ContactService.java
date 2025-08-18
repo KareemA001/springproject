@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Slf4j
 @Service
@@ -31,6 +32,19 @@ public class ContactService {
             isSaved = true;
         }
         return isSaved;
+    }
+    public List<Contact> findMsgsWithOpenStatus(){
+        List<Contact> contactMsgs = contactRepo.findMsgsWithStatus(ProjectConstants.OPEN);
+        return contactMsgs;
+    }
+
+    public boolean updateMsgStatus(int contactId, String updatedBy){
+        boolean isUpdated = false;
+        int result = contactRepo.updateMsgStatus(contactId,ProjectConstants.CLOSE, updatedBy);
+        if(result>0) {
+            isUpdated = true;
+        }
+        return isUpdated;
     }
 
 }

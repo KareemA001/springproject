@@ -43,7 +43,6 @@ public class SecurityConfig {
 
     }
 
-
     @Bean
     public InMemoryUserDetailsManager userDetailsService() {
 
@@ -59,6 +58,4 @@ public class SecurityConfig {
                 .build();
         return new InMemoryUserDetailsManager(user, admin);
     }
-
-
 }
