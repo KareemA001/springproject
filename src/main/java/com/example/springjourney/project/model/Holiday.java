@@ -4,11 +4,11 @@ package com.example.springjourney.project.model;
 import lombok.Data;
 
 @Data
-public class Holiday {
+public class Holiday extends BasicEntity{
 
-    public final String day ;
-    public final String reason ;
-    public final Type type ;
+    public String day ;
+    public String reason ;
+    public Type type ;
 
     public enum Type {
         FESTIVAL, FEDERAL
