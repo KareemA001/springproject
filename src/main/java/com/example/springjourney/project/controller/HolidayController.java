@@ -2,6 +2,7 @@ package com.example.springjourney.project.controller;
 
 import com.example.springjourney.project.model.Holiday;
 import com.example.springjourney.project.repos.HolidayRepo;
+import com.example.springjourney.project.repos.HolidayRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,11 +15,11 @@ import java.util.stream.Collectors;
 @Controller
 public class HolidayController {
 
-    private HolidayRepo holidayRepo ;
+    private HolidayRepository holidayRepository;
 
     @Autowired
-    public HolidayController(HolidayRepo holidayRepo){
-        this.holidayRepo = holidayRepo;
+    public HolidayController(HolidayRepository holidayRepository){
+        this.holidayRepository = holidayRepository;
     }
 
     @GetMapping("/holidays/{display}")
@@ -31,7 +32,7 @@ public class HolidayController {
         }else if(null != display && display.equals("festival")){
             model.addAttribute("festival",true);
         }
-        List<Holiday> holidays = holidayRepo.findAllHolidays();
+        List<Holiday> holidays = holidayRepository.findAll();
         Holiday.Type[] types = Holiday.Type.values();
         for (Holiday.Type type : types) {
             model.addAttribute(type.toString(),

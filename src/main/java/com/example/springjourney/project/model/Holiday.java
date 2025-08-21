@@ -1,13 +1,20 @@
 package com.example.springjourney.project.model;
 
 
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Data
+@Table(name="holidays")
+@Entity
 public class Holiday extends BasicEntity{
 
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @Column(name="day")
     public String day ;
     public String reason ;
+    @Enumerated(EnumType.STRING)
     public Type type ;
 
     public enum Type {

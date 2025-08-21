@@ -73,5 +73,4 @@ public class ContactController {
         contactService.updateMsgStatus(id,authentication.getName());
         return "redirect:/displayMessages";
     }
-
 }
