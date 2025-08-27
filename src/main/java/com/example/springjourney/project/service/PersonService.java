@@ -20,10 +20,10 @@ public class PersonService {
     public boolean createNewPerson(Person person){
         boolean isSaved = false;
         Roles role = rolesRepository.getByRoleName(ProjectConstants.STUDENT_ROLE);
-        person.setRole(role);
+        person.setRoles(role);
         person = personRepository.save(person);
-
-        if(person !=null && person.getPersonId() > 0){
+        if (null != person && person.getPersonId() > 0)
+        {
             isSaved = true;
         }
         return isSaved;

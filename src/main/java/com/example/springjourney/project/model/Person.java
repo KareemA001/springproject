@@ -1,6 +1,6 @@
 package com.example.springjourney.project.model;
 
-import com.example.springjourney.project.annotations.FiledsValueMatch;
+import com.example.springjourney.project.annotations.FieldsValueMatch;
 import com.example.springjourney.project.annotations.PasswordValidator;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
@@ -8,23 +8,21 @@ import lombok.Data;
 
 @Data
 @Entity
-@FiledsValueMatch.List({
-        @FiledsValueMatch(
+@FieldsValueMatch.List({
+        @FieldsValueMatch(
                 field = "pwd",
                 fieldMatch = "confirmPwd",
                 message = "Passwords do not match!"
         ),
-        @FiledsValueMatch(
+        @FieldsValueMatch(
                 field = "email",
                 fieldMatch = "confirmEmail",
                 message = "Email addresses do not match!"
         )
 })
-
 public class Person extends BasicEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="contact_id")
     private int personId;
 
     @NotBlank(message="Name must not be blank")
@@ -54,11 +52,11 @@ public class Person extends BasicEntity{
     @Transient
     private String confirmPwd;
 
-    @OneToOne(fetch=FetchType.EAGER,cascade=CascadeType.ALL,targetEntity=Address.class)
-    @JoinColumn(name="address_id",referencedColumnName="addressId",nullable=true)
-    private Address address;
+    @OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.PERSIST, targetEntity = Roles.class)
+    @JoinColumn(name = "role_id", referencedColumnName = "roleId",nullable = false)
+    private Roles roles;
 
-    @OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST, targetEntity = Roles.class)
-    @JoinColumn(name="role_id", referencedColumnName="roleId", nullable=false)
-    private Roles role;
+    @OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL, targetEntity = Address.class)
+    @JoinColumn(name = "address_id", referencedColumnName = "addressId",nullable = true)
+    private Address address;
 }

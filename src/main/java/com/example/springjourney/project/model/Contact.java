@@ -24,6 +24,7 @@ public class Contact extends BasicEntity{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="contact_id")
     private int contactId;
+
     private String status;
     /*
         * @NotNull: Checks if a given field is not null but allows empty values & zero elements inside collections.

@@ -63,7 +63,7 @@ public class ContactController {
     @RequestMapping("/displayMessages")
     public ModelAndView displayMessages(Model model) {
         List<Contact> contactMsgs = contactService.findMsgsWithOpenStatus();
-        ModelAndView modelAndView = new ModelAndView("message.html");
+        ModelAndView modelAndView = new ModelAndView("messages.html");
         modelAndView.addObject("contactMsgs",contactMsgs);
         return modelAndView;
     }

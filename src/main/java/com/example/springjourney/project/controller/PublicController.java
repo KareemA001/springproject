@@ -15,22 +15,26 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("public")
 public class PublicController {
 
-    @Autowired
-    private PersonService personService;
 
-    @RequestMapping(value="/register",method={RequestMethod.GET})
-    public String displayRegistrationPage(Model model){
-    model.addAttribute("person",new Person());
+    @Autowired
+    PersonService personService;
+
+    @RequestMapping(value ="/register",method = { RequestMethod.GET})
+    public String displayRegisterPage(Model model) {
+        model.addAttribute("person", new Person());
         return "register.html";
     }
 
-    @RequestMapping(value="/createUser",method=RequestMethod.POST)
-    public String createUser(@Valid @ModelAttribute("person") Person person, Errors errors){
-
-        boolean isSaved = personService.createNewPerson(person) ;
+    @RequestMapping(value ="/createUser",method = { RequestMethod.POST})
+    public String createUser(@Valid @ModelAttribute("person") Person person, Errors errors) {
+        if(errors.hasErrors()){
+            return "register.html";
+        }
+        boolean isSaved = personService.createNewPerson(person);
         if(isSaved){
             return "redirect:/login?register=true";
-        }else
+        }else {
             return "register.html";
+        }
     }
 }

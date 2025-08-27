@@ -7,11 +7,16 @@ import org.springframework.web.servlet.ModelAndView;
 @ControllerAdvice
 public class GlobalExceptionController {
 
+    /*
+    @ExceptionHandler will register the given method for a given
+    exception type, so that ControllerAdvice can invoke this method
+    logic if a given exception type is thrown inside the web application.
+    * */
     @ExceptionHandler(Exception.class)
-    public ModelAndView exception(Exception e) {
-        ModelAndView error = new ModelAndView();
-        error.setViewName("error");
-        error.addObject("errormsg", e.getMessage());
-        return error;
+    public ModelAndView exceptionHandler(Exception exception){
+        ModelAndView errorPage = new ModelAndView();
+        errorPage.setViewName("error");
+        errorPage.addObject("errormsg", exception.getMessage());
+        return errorPage;
     }
 }
