@@ -24,7 +24,7 @@ public class SpringUserNamePasswordAuthenticationProvider implements Authenticat
     private PersonRepository personRepository;
 
     @Autowired
-    private PasswordEncoder bCryptPasswordEncoder;
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public Authentication authenticate(Authentication authentication)
@@ -32,12 +32,10 @@ public class SpringUserNamePasswordAuthenticationProvider implements Authenticat
         String email = authentication.getName();
         String pwd = authentication.getCredentials().toString();
         Person person = personRepository.readByEmail(email);
-        boolean isEqual = bCryptPasswordEncoder.matches(pwd,person.getPwd()) ;
-
-        if(isEqual && null != person && person.getPersonId()>0 &&
-                pwd.equals(person.getPwd())){
+        if(null != person && person.getPersonId()>0 &&
+                passwordEncoder.matches(pwd,person.getPwd())){
             return new UsernamePasswordAuthenticationToken(
-                    person.getName(), null , getGrantedAuthorities(person.getRoles()));
+                    email, null, getGrantedAuthorities(person.getRoles()));
         }else{
             throw new BadCredentialsException("Invalid credentials!");
         }

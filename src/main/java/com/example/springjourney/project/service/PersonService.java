@@ -20,17 +20,15 @@ public class PersonService {
     private RolesRepository rolesRepository;
 
     @Autowired
-    private PasswordEncoder bCryptPasswordEncoder ;
+    private PasswordEncoder passwordEncoder;
 
-    public boolean createNewPerson(Person person){
+    public boolean createNewPerson(Person person) {
         boolean isSaved = false;
         Roles role = rolesRepository.getByRoleName(ProjectConstants.STUDENT_ROLE);
         person.setRoles(role);
-        String hashedPassword = bCryptPasswordEncoder.encode(person.getPwd());
-        person.setPwd(hashedPassword);
+        person.setPwd(passwordEncoder.encode(person.getPwd()));
         person = personRepository.save(person);
-        if (null != person && person.getPersonId() > 0)
-        {
+        if (null != person && person.getPersonId() > 0) {
             isSaved = true;
         }
         return isSaved;

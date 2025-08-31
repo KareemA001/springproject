@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -29,27 +30,28 @@ public class ContactService {
     public boolean saveMessageDetails(Contact contact){
         boolean isSaved = false;
         contact.setStatus(ProjectConstants.OPEN);
-        Contact result = contactRepository.save(contact);
-        if(result != null && result.getContactId() > 0){
+        Contact savedContact = contactRepository.save(contact);
+        if(null != savedContact && savedContact.getContactId()>0) {
             isSaved = true;
         }
         return isSaved;
     }
+
     public List<Contact> findMsgsWithOpenStatus(){
         List<Contact> contactMsgs = contactRepository.findByStatus(ProjectConstants.OPEN);
         return contactMsgs;
     }
 
     public boolean updateMsgStatus(int contactId){
-        boolean isChanged = false;
-        Contact isUpdated = contactRepository.findById(contactId).orElse(null);
-        if(isUpdated != null){
-            isUpdated.setStatus(ProjectConstants.CLOSE);
+        boolean isUpdated = false;
+        Optional<Contact> contact = contactRepository.findById(contactId);
+        contact.ifPresent(contact1 -> {
+            contact1.setStatus(ProjectConstants.CLOSE);
+        });
+        Contact updatedContact = contactRepository.save(contact.get());
+        if(null != updatedContact && updatedContact.getUpdatedBy()!=null) {
+            isUpdated = true;
         }
-        Contact isUpdated2 = contactRepository.save(isUpdated);
-        if(isUpdated2 != null && isUpdated2.getUpdatedBy() != null){
-            isChanged = true;
-        }
-        return isChanged;
+        return isUpdated;
     }
 }
