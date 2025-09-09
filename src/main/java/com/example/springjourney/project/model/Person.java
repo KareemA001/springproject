@@ -8,6 +8,9 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Getter
 @Setter
 @Entity
@@ -66,4 +69,10 @@ public class Person extends BasicEntity{
     @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "class_id", referencedColumnName = "classId", nullable = true)
     private EazyClass eazyClass;
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @JoinTable(name="person_courses",
+                joinColumns = {@JoinColumn(name="person_id",referencedColumnName = "personId")},
+                inverseJoinColumns = {@JoinColumn(name="course_id",referencedColumnName="courseId")})
+    Set<Courses> courses = new HashSet<>();
 }
